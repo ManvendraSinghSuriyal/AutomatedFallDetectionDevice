@@ -1,28 +1,28 @@
-  #include <Wire.h>
-#include <ESP8266WiFi.h>
+ #include <Wire.h> // This library allows you to communicate with I2C/TWI devices. 
+#include <ESP8266WiFi.h> // used to connect to a WiFi network with strongest WiFi signal. 
 
 
 const int addrss=0x68;  // this is the I2C Address of  MPU-6050 Sensor
 int16_t AccX,AccY,AccZ,temp,GyroX,GyroY,GyroZ;
 float AX=0, AY=0, AZ=0, GX=0, GY=0, GZ=0;
 boolean fallStatus = false; //it stores if a fall has occurred 
-boolean trgr1=false; //it store if first trigger (lower threshold) has occurred
-boolean trgr2=false; //it store if second trigger (upper threshold) has occurred
+boolean trgr1=false; //it store if first trigger (the Lower threshold value)  occurred
+boolean trgr2=false; //it store if second trigger (the Upper threshold value)  occurred
 boolean trgr3=false; //it store if third trigger (orientation change) has occurred
-byte trgr1Count=0; //it store the counts past since trigger 1 was set true
-byte trgr2Count=0; //it store the counts past since trigger 2 was set true
-byte trgr3Count=0; //it store the counts past since trigger 3 was set true
+byte trgr1Count=0; //it store the counts past as trigger 1 sets true
+byte trgr2Count=0; //it store the counts past as trigger 2 sets true
+byte trgr3Count=0; //it store the counts past as trigger 3  sets true
 int AnglChange=0;
 
 
 // WiFi Credentials
-const char *SSID =  "Redmi5";     //  WiFi Name
-const char *PASS =  "12345678"; // WiFi Password
+const char *SSID =  "Redmi5";     //  WiFi Network Name
+const char *PASS =  "12345678"; // WiFi Network Password
 void sendEvent(const char *event);
 
 
-const char *Host = "maker.ifttt.com";
-const char *PrivateKey = "hUAAAz0AVvc6-NW1UmqWXXv6VQWmpiGFxx3sV5rnaM9";
+const char *Host = "maker.ifttt.com";  // Host name
+const char *PrivateKey = "hUAAAz0AVvc6-NW1UmqWXXv6VQWmpiGFxx3sV5rnaM9"; // key
 
 // implementing setup()
 void setup(){
@@ -164,7 +164,7 @@ void sendEvent(const char *event)
       String line = client.readStringUntil('\r');
       Serial.print(line);
     } else {
-      // No data yet, wait a bit
+      // if No data yet,please wait a bit
       delay(50);
     };
   }
